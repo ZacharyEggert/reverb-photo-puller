@@ -290,11 +290,6 @@
     "@typescript-eslint/types" "5.46.1"
     eslint-visitor-keys "^3.3.0"
 
-"@zacharyeggert/reverb-api@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@zacharyeggert/reverb-api/-/reverb-api-1.0.3.tgz#0f2c85ef0b47de695eefc9cd84c7d61f34d884c5"
-  integrity sha512-JRVKO4jdLO0Mix09YIFu7JW/E7APUsyNyJpCydYjdF/T2FswxuSmNbV9A/kx2J72Y4RgW0dSZoK69Tw8q2vVpA==
-
 acorn-jsx@^5.3.2:
   version "5.3.2"
   resolved "https://registry.yarnpkg.com/acorn-jsx/-/acorn-jsx-5.3.2.tgz#7ed5bb55908b3b2f1bc55c6af1653bada7f07937"

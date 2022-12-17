@@ -9,7 +9,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "@zacharyeggert/reverb-api": "^1.0.3",
     "axios": "^1.2.1",
     "next": "13.0.2",
     "react": "18.2.0",

@@ -51,6 +51,9 @@ const Home: NextPage = () => {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setFetching(false);
       });
   };
 
@@ -79,12 +82,18 @@ const Home: NextPage = () => {
             fetch
           </button>
         </div>
-        <div className="relative flex flex-row flex-wrap">
-          {listings.map((listing) => (
-            <div key={listing.id} className="relative w-1/6 flex-none">
-              <img src={listing.preview_url} />
-            </div>
-          ))}
+        <div className="relative mt-8 grid grid-cols-6 gap-2 bg-neutral-800">
+          {listings &&
+            listings.map((listing) => (
+              <div key={listing.id} className="relative aspect-square">
+                <div className="grid h-full w-full items-center overflow-clip bg-neutral-700">
+                  <img
+                    src={listing.preview_url}
+                    className="my-auto mx-auto block max-h-full max-w-full"
+                  />
+                </div>
+              </div>
+            ))}
         </div>
       </main>
     </>

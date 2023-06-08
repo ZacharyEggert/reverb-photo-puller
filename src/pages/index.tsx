@@ -29,10 +29,13 @@ export interface Transformation {
   angle: number;
 }
 
+type Listing = { id: string; title: string; published_at: string };
+
 const Home: NextPage = () => {
   const [reverbNumber, setReverbNumber] = useState("");
   const [fetching, setFetching] = useState(false);
 
+  const [listingList, setListingList] = useState<Listing[]>([]);
   const [listings, setListings] = useState<CloudinaryPhoto[]>([]);
 
   const changeReverbNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,6 +60,41 @@ const Home: NextPage = () => {
       });
   };
 
+  const fetchListingList = () => {
+    setFetching(true);
+    console.log("fetching listing list");
+
+    //get the apiKey from local storage
+    const apiKey = localStorage.getItem("apiKey");
+    //if it doesn't exist, prompt the user for it
+    if (!apiKey) {
+      const apiKey_ = prompt(
+        "Enter your reverb api key (read priviledges) or default to Diablo Guitars"
+      );
+      if (apiKey_) {
+        // if the user entered a key, save it to local storage
+        localStorage.setItem("apiKey", apiKey_);
+      }
+    }
+
+    axios
+      .post("/api/listings", { apiKey: undefined })
+      .then((res) => {
+        if (res.status !== 200) {
+          console.log(res);
+          throw new Error("failed to fetch listing list");
+        }
+        console.log(res.data);
+        setListingList(res.data.listings);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setFetching(false);
+      });
+  };
+
   return (
     <>
       <Head>
@@ -67,34 +105,71 @@ const Home: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="min-h-screen overflow-x-hidden bg-neutral-800 text-white">
-        <div className="grid items-center">
-          <input
-            value={reverbNumber}
-            onChange={changeReverbNumber}
-            className="mx-auto my-2 bg-neutral-700 py-1 px-2"
-          />
-          <button
-            onClick={fetchReverbPhotos}
-            className=" my-2 mx-auto w-1/6 rounded-2xl border border-neutral-600 bg-neutral-700 px-2 py-1"
-            disabled={fetching}
-          >
-            fetch
-          </button>
-        </div>
-        <div className="relative mt-8 grid grid-cols-6 gap-2 bg-neutral-800">
-          {listings &&
-            listings.map((listing) => (
-              <div key={listing.id} className="relative aspect-square">
-                <div className="grid h-full w-full items-center overflow-clip bg-neutral-700">
-                  <img
-                    src={listing.preview_url}
-                    className="my-auto mx-auto block max-h-full max-w-full"
-                  />
+      <main className="relative grid min-h-screen grid-cols-9 overflow-x-hidden bg-neutral-800 px-2 text-white">
+        <section className="col-span-6">
+          <div className="grid items-center">
+            <input
+              value={reverbNumber}
+              onChange={changeReverbNumber}
+              className="mx-auto my-2 bg-neutral-700 py-1 px-2"
+            />
+            <button
+              onClick={fetchReverbPhotos}
+              className=" my-2 mx-auto w-1/5 rounded-2xl border border-neutral-600 bg-neutral-700 px-2 py-1"
+              disabled={fetching}
+            >
+              fetch
+            </button>
+            <button
+              onClick={fetchListingList}
+              className=" my-2 mx-auto w-1/5 rounded-2xl border border-neutral-600 bg-neutral-700 px-2 py-1"
+              disabled={fetching}
+            >
+              fetch listing list
+            </button>
+          </div>
+          <div className="relative mt-8 grid grid-cols-5 gap-2 bg-neutral-800">
+            {listings &&
+              listings.map((listing) => (
+                <div key={listing.id} className="relative aspect-square">
+                  <div className="grid h-full w-full items-center overflow-clip bg-neutral-700">
+                    <img
+                      src={listing.preview_url}
+                      className="my-auto mx-auto block max-h-full max-w-full"
+                    />
+                  </div>
                 </div>
-              </div>
-            ))}
-        </div>
+              ))}
+          </div>
+        </section>
+        <section className="fixed right-0 col-span-3 h-full w-1/3">
+          <div className="h-full w-full overflow-y-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>id</th>
+                  <th>title</th>
+                  <th>date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {listingList &&
+                  listingList.map((listing) => (
+                    <tr key={listing.id}>
+                      <td
+                        onClick={() => setReverbNumber(listing.id)}
+                        className="cursor-pointer hover:bg-neutral-700"
+                      >
+                        {listing.id}
+                      </td>
+                      <td>{listing.title}</td>
+                      <td className="text-xs">{listing.published_at}</td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
       </main>
     </>
   );

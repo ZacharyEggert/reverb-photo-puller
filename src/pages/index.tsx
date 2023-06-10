@@ -157,7 +157,19 @@ const Home: NextPage = () => {
                   listingList.map((listing) => (
                     <tr key={listing.id}>
                       <td
-                        onClick={() => setReverbNumber(listing.id)}
+                        onClick={(e) => {
+                          if (e.shiftKey) {
+                            window.open(
+                              `https://api.reverb.com/api/listings/${listing.id}`
+                            );
+                          } else if (e.ctrlKey) {
+                            window.open(
+                              `https://reverb.com/item/${listing.id}`
+                            );
+                          } else {
+                            setReverbNumber(listing.id);
+                          }
+                        }}
                         className="cursor-pointer hover:bg-neutral-700"
                       >
                         {listing.id}

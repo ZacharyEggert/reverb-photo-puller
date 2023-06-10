@@ -95,6 +95,39 @@ const Home: NextPage = () => {
       });
   };
 
+  // const downloadAllPhotosZip = () => {
+  //   setFetching(true);
+  //   axios
+  //     .post("/api/download", { reverbNumber }, { responseType: "arraybuffer" })
+  //     .then((res) => {
+  //       if (res.status !== 200) {
+  //         console.log(res);
+  //         throw new Error("failed to fetch listing list");
+  //       }
+  //       // expect a zip buffer in the response
+  //       console.log(res.data);
+
+  //       // create a blob from the buffer
+  //       const blob = new Blob([res.data], { type: "application/zip" });
+  //       // create a url from the blob
+  //       const url = window.URL.createObjectURL(blob);
+
+  //       // create a link element
+  //       const link = document.createElement("a");
+  //       link.href = url;
+  //       link.setAttribute("download", `${reverbNumber}.zip`); //or any other extension
+  //       document.body.appendChild(link);
+  //       link.click();
+  //       link.remove();
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     })
+  //     .finally(() => {
+  //       setFetching(false);
+  //     });
+  // };
+
   return (
     <>
       <Head>
@@ -120,6 +153,13 @@ const Home: NextPage = () => {
             >
               fetch
             </button>
+            {/* <button
+              onClick={downloadAllPhotosZip}
+              className=" my-2 mx-auto w-1/5 rounded-2xl border border-neutral-600 bg-neutral-700 px-2 py-1"
+              disabled={fetching}
+            >
+              download all photos
+            </button> */}
             <button
               onClick={fetchListingList}
               className=" my-2 mx-auto w-1/5 rounded-2xl border border-neutral-600 bg-neutral-700 px-2 py-1"
@@ -151,7 +191,7 @@ const Home: NextPage = () => {
                               link.href = url;
                               link.setAttribute(
                                 "download",
-                                `${listing.id}-${i}.jpg`
+                                `${reverbNumber}-${i}.jpg`
                               ); //or any other extension
                               document.body.appendChild(link);
                               link.click();

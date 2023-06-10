@@ -146,7 +146,7 @@ const Home: NextPage = () => {
           <div className="h-full w-full overflow-y-scroll">
             <table>
               <thead>
-                <tr>
+                <tr className="gap-1">
                   <th>id</th>
                   <th>title</th>
                   <th>date</th>
@@ -155,7 +155,7 @@ const Home: NextPage = () => {
               <tbody>
                 {listingList &&
                   listingList.map((listing) => (
-                    <tr key={listing.id}>
+                    <tr key={listing.id} className="gap-1">
                       <td
                         onClick={(e) => {
                           if (e.shiftKey) {
@@ -170,11 +170,20 @@ const Home: NextPage = () => {
                             setReverbNumber(listing.id);
                           }
                         }}
-                        className="cursor-pointer hover:bg-neutral-700"
+                        className="cursor-pointer rounded-md hover:bg-neutral-700"
                       >
                         {listing.id}
                       </td>
-                      <td>{listing.title}</td>
+                      <td
+                        onClick={() => {
+                          navigator.clipboard.writeText(
+                            listing.title.replace(/(\/|\||:)+\s?/g, " ")
+                          );
+                        }}
+                        className="cursor-pointer rounded-md hover:bg-neutral-700"
+                      >
+                        {listing.title}
+                      </td>
                       <td className="text-xs">{listing.published_at}</td>
                     </tr>
                   ))}

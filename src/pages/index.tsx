@@ -130,12 +130,38 @@ const Home: NextPage = () => {
           </div>
           <div className="relative mt-8 grid grid-cols-5 gap-2 bg-neutral-800">
             {listings &&
-              listings.map((listing) => (
+              listings.map((listing, i) => (
                 <div key={listing.id} className="relative aspect-square">
                   <div className="grid h-full w-full items-center overflow-clip bg-neutral-700">
                     <img
                       src={listing.preview_url}
                       className="my-auto mx-auto block max-h-full max-w-full"
+                      onClick={() => {
+                        //download the image
+                        fetch(listing.preview_url, {
+                          method: "GET",
+                          headers: {},
+                        })
+                          .then((response) => {
+                            response.arrayBuffer().then(function (buffer) {
+                              const url = window.URL.createObjectURL(
+                                new Blob([buffer])
+                              );
+                              const link = document.createElement("a");
+                              link.href = url;
+                              link.setAttribute(
+                                "download",
+                                `${listing.id}-${i}.jpg`
+                              ); //or any other extension
+                              document.body.appendChild(link);
+                              link.click();
+                              document.body.removeChild(link);
+                            });
+                          })
+                          .catch((err) => {
+                            console.log(err);
+                          });
+                      }}
                     />
                   </div>
                 </div>

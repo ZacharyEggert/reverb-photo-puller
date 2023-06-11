@@ -95,38 +95,44 @@ const Home: NextPage = () => {
       });
   };
 
-  // const downloadAllPhotosZip = () => {
-  //   setFetching(true);
-  //   axios
-  //     .post("/api/download", { reverbNumber }, { responseType: "arraybuffer" })
-  //     .then((res) => {
-  //       if (res.status !== 200) {
-  //         console.log(res);
-  //         throw new Error("failed to fetch listing list");
-  //       }
-  //       // expect a zip buffer in the response
-  //       console.log(res.data);
+  const downloadImage = (
+    url: string,
+    reverbNumber: string,
+    imageNumber = 0
+  ) => {
+    const i = imageNumber < 10 ? `0${imageNumber}` : imageNumber;
 
-  //       // create a blob from the buffer
-  //       const blob = new Blob([res.data], { type: "application/zip" });
-  //       // create a url from the blob
-  //       const url = window.URL.createObjectURL(blob);
+    fetch(url, {
+      method: "GET",
+      headers: {},
+    })
+      .then((response) => {
+        response.arrayBuffer().then(function (buffer) {
+          const url = window.URL.createObjectURL(new Blob([buffer]));
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", `${reverbNumber}-${i}.jpg`); //or any other extension
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-  //       // create a link element
-  //       const link = document.createElement("a");
-  //       link.href = url;
-  //       link.setAttribute("download", `${reverbNumber}.zip`); //or any other extension
-  //       document.body.appendChild(link);
-  //       link.click();
-  //       link.remove();
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     })
-  //     .finally(() => {
-  //       setFetching(false);
-  //     });
-  // };
+  const downloadAllPhotos = () => {
+    if (!listings) return;
+    if (listings.length === 0) return;
+
+    for (let i = 0; i < listings.length; i++) {
+      if (!listings[i]) continue;
+      if (!listings[i]?.preview_url) continue;
+      const url = listings[i]?.preview_url;
+      url && downloadImage(url, reverbNumber, i);
+    }
+  };
 
   return (
     <>
@@ -153,13 +159,13 @@ const Home: NextPage = () => {
             >
               fetch
             </button>
-            {/* <button
-              onClick={downloadAllPhotosZip}
+            <button
+              onClick={downloadAllPhotos}
               className=" my-2 mx-auto w-1/5 rounded-2xl border border-neutral-600 bg-neutral-700 px-2 py-1"
               disabled={fetching}
             >
               download all photos
-            </button> */}
+            </button>
             <button
               onClick={fetchListingList}
               className=" my-2 mx-auto w-1/5 rounded-2xl border border-neutral-600 bg-neutral-700 px-2 py-1"
@@ -178,29 +184,7 @@ const Home: NextPage = () => {
                       className="my-auto mx-auto block max-h-full max-w-full"
                       onClick={() => {
                         //download the image
-                        fetch(listing.preview_url, {
-                          method: "GET",
-                          headers: {},
-                        })
-                          .then((response) => {
-                            response.arrayBuffer().then(function (buffer) {
-                              const url = window.URL.createObjectURL(
-                                new Blob([buffer])
-                              );
-                              const link = document.createElement("a");
-                              link.href = url;
-                              link.setAttribute(
-                                "download",
-                                `${reverbNumber}-${i}.jpg`
-                              ); //or any other extension
-                              document.body.appendChild(link);
-                              link.click();
-                              document.body.removeChild(link);
-                            });
-                          })
-                          .catch((err) => {
-                            console.log(err);
-                          });
+                        downloadImage(listing.preview_url, reverbNumber, i);
                       }}
                     />
                   </div>

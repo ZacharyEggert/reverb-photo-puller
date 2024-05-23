@@ -5,7 +5,13 @@ const handler: NextApiHandler = async (req, res) => {
 		query: { id },
 	} = req
 
-	const response = await fetch(`https://reverb.com/api/listings/${id}`)
+	const fetchRequest : Request = new Request(`https://api.reverb.com/api/listings/${id}`, {headers: {
+		"Content-Type": "application/hal+json",
+		"Accept": "application/hal+json",
+		"Accept-Version": "3.0",
+	}});
+
+	const response = await fetch(fetchRequest)
 	const data = await response.json()
 
 	res.status(200).json(data['cloudinary_photos'])

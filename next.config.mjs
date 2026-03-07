@@ -13,7 +13,13 @@ const config = {
     defaultLocale: "en",
   },
   images: {
-    domains: ["images.reverb.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.reverb.com",
+        pathname: "/**",
+      },
+    ],
   },
 };
 export default config;

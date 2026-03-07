@@ -4,7 +4,7 @@ import axios from 'axios';
 import { type NextPage } from 'next';
 import Head from 'next/head';
 import { useState } from 'react';
-import { CloudinaryPhoto, Listing } from '../lib/types';
+import type { CloudinaryPhoto, Listing } from '../lib/types';
 
 const Home: NextPage = () => {
   const [reverbNumber, setReverbNumber] = useState('');
@@ -110,7 +110,8 @@ const Home: NextPage = () => {
       if (!listingPhotos[i]) continue;
       if (!listingPhotos[i]?.preview_url) continue;
       const url = listingPhotos[i]?.preview_url;
-      url && downloadImage(url, reverbNumber, i);
+			if( !url ) continue;
+      downloadImage(url, reverbNumber, i);
     }
   };
 
@@ -137,7 +138,7 @@ const Home: NextPage = () => {
           <div className="relative mt-8 grid grid-cols-5 gap-2 bg-neutral-800">
             {listingPhotos &&
               listingPhotos.map((listingPhoto, i) => (
-                <PhotoDisplay listingPhoto={listingPhoto} downloadImage={downloadImage} reverbNumber={reverbNumber} i={i}/>
+                <PhotoDisplay key={i} listingPhoto={listingPhoto} downloadImage={downloadImage} reverbNumber={reverbNumber} i={i}/>
               ))}
           </div>
         </section>

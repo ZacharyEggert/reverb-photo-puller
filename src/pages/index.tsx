@@ -4,8 +4,7 @@ import axios from 'axios';
 import { type NextPage } from 'next';
 import Head from 'next/head';
 import { useState } from 'react';
-import { CloudinaryPhoto } from './types';
-import { Listing } from './types';
+import { CloudinaryPhoto, Listing } from '../lib/types';
 
 const Home: NextPage = () => {
   const [reverbNumber, setReverbNumber] = useState('');

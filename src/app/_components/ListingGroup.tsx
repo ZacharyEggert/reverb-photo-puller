@@ -18,7 +18,8 @@ export default function List() {
         <table className="w-full">
           <thead>
             <tr className="gap-1">
-              <th className="w-2/6">ID</th>
+              <th className="w-1/6">PHOTO</th>
+              <th className="w-1/6">ID</th>
               <th className="w-3/6">TITLE</th>
               <th className="w-1/6">DATE</th>
             </tr>

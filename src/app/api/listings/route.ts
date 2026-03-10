@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
       page++;
     }
 
-    console.dir(listings[0]);
+    // console.dir(listings[0]);
 
     // listings.reverse();
     return new Response(JSON.stringify({ listings }), { status: 200 });

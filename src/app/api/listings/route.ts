@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { NextRequest } from 'next/server';
 import { env } from '~/env/server.mjs';
+import { Listing } from '~/lib/types';
 
 export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => ({}));
@@ -9,7 +10,7 @@ export async function POST(req: NextRequest) {
   try {
     const baseURL = 'https://api.reverb.com/api/my/listings?per_page=100';
     let page = 1;
-    let listings: unknown[] = [];
+    let listings: Listing[] = [];
     let shouldContinue = true;
 
     while (shouldContinue) {
@@ -23,7 +24,7 @@ export async function POST(req: NextRequest) {
       });
 
       const { data } = response;
-      listings = [...listings, ...data.listings];
+      listings = [...listings, ...data.listings] as Listing[];
       shouldContinue = data._links.next ? true : false;
       page++;
     }
@@ -31,7 +32,19 @@ export async function POST(req: NextRequest) {
     // console.dir(listings[0]);
 
     // listings.reverse();
-    return new Response(JSON.stringify({ listings }), { status: 200 });
+
+    //pull out the relevant data from the listings
+    const filtered_listings = listings.map((listing) => {
+      return {
+        id: listing.id,
+        title: listing.title,
+        published_at: listing.published_at,
+        photos: listing.photos,
+      };
+    });
+    return new Response(JSON.stringify({ listings: filtered_listings }), {
+      status: 200,
+    });
   } catch (error) {
     console.log(error);
     return new Response(JSON.stringify({ error }), { status: 500 });

@@ -17,14 +17,23 @@ export default function Interactables() {
     setFetching,
     setListingList,
     setListings,
+    setDrawerOpen,
+    drawerOpen,
   } = useFormContext();
 
   return (
-    <section className="my-1 grid items-center lg:my-4 xl:grid-cols-2">
+    <section className="relative grid items-center py-2 xl:grid-cols-2">
+      <span
+        className="absolute top-1 left-1.5 cursor-pointer text-4xl text-neutral-400 hover:text-neutral-200 xl:hidden"
+        onClick={() => setDrawerOpen(true)}
+        hidden={fetching || drawerOpen}
+      >
+        =
+      </span>
       <input
         value={reverbNumber}
         onChange={(e) => setReverbNumber(e.target.value)}
-        className="mx-auto my-1 rounded-md bg-neutral-800 px-2 py-1 text-center uppercase lg:my-2 lg:w-1/2 lg:py-2 lg:text-lg"
+        className="mx-auto my-1 rounded-md bg-neutral-800 px-2 py-1 text-center uppercase xl:my-2 xl:w-1/2 xl:py-2 xl:text-lg"
       />
       <CustomButton
         onClick={() => downloadAllPhotos(listingPhotos, reverbNumber)}
@@ -56,7 +65,7 @@ const CustomButton = (props: JSX.IntrinsicElements['button']) => {
   return (
     <button
       {...rest}
-      className={`mx-auto my-1 min-w-36 rounded-md bg-neutral-800 px-2 py-1 text-center lg:my-2 lg:w-1/2 lg:py-2 lg:text-lg ${className}`}
+      className={`mx-auto my-1 min-w-36 rounded-md bg-neutral-800 px-2 py-1 text-center xl:my-2 xl:w-1/2 xl:py-2 xl:text-lg ${className}`}
     >
       {children}
     </button>

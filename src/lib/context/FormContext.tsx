@@ -12,6 +12,8 @@ interface FormContextType {
   setListingList: (value: Listing[]) => void;
   listingPhotos: CloudinaryPhoto[];
   setListings: (value: CloudinaryPhoto[]) => void;
+  drawerOpen: boolean;
+  setDrawerOpen: (value: boolean) => void;
 }
 
 const FormContext = createContext<FormContextType>({
@@ -23,6 +25,8 @@ const FormContext = createContext<FormContextType>({
   setListingList: () => {},
   listingPhotos: [],
   setListings: () => {},
+  drawerOpen: false,
+  setDrawerOpen: () => {},
 });
 
 export const useFormContext = () => useContext(FormContext);
@@ -36,6 +40,7 @@ export const FormProvider: React.FC<{ children: React.ReactNode }> = ({
   const [fetching, setFetching] = useState(false);
   const [listingList, setListingList] = useState<Listing[]>([]);
   const [listingPhotos, setListings] = useState<CloudinaryPhoto[]>([]);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (
     <FormContext.Provider
@@ -48,6 +53,8 @@ export const FormProvider: React.FC<{ children: React.ReactNode }> = ({
         setListingList,
         listingPhotos,
         setListings,
+        drawerOpen,
+        setDrawerOpen,
       }}
     >
       {children}

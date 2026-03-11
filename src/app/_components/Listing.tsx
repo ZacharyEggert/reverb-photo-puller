@@ -38,35 +38,47 @@ export default function ListingRow(props: {
       </td>
       <td
         onClick={(e) => {
-          if (e.shiftKey) {
+          let shiftPressed = e.getModifierState('Shift');
+          let altPressed = e.getModifierState('Alt');
+          let metaPressed = e.getModifierState('Meta');
+
+          if (shiftPressed) {
             window.open(`https://api.reverb.com/api/listings/${listing.id}`);
-          } else if (e.ctrlKey) {
+          } else if (metaPressed) {
             window.open(`https://reverb.com/item/${listing.id}`);
             // handle?.blur();
             setTimeout(window.focus, 2);
-          } else if (e.altKey) {
+          } else if (altPressed) {
             oneClickFetch(listing.id);
           } else {
             setReverbNumber(listing.id);
           }
         }}
-        className="cursor-pointer rounded-md hover:bg-neutral-700"
+        className="cursor-pointer hover:bg-neutral-700"
       >
         {listing.id}
       </td>
       <td
         onClick={() => {
-          navigator.clipboard.writeText(
-            listing.title.replace(/(\/|\||:)+\s?/g, ' '),
-          );
+          navigator.clipboard.writeText(listing.title);
         }}
-        className="cursor-pointer rounded-md hover:bg-neutral-700"
+        className="cursor-pointer hover:bg-neutral-700"
       >
-        {listing.title}
+        {truncateTitle(listing.title)}
       </td>
-      <td className="text-xs">
+      <td className="text-center text-xs">
         {new Date(listing.published_at).toLocaleDateString()}
       </td>
     </tr>
   );
 }
+
+const truncateTitle = (title: string, maxLength: number = 100) => {
+  if (title.length <= maxLength) return title;
+  return (
+    <>
+      {title.slice(0, maxLength - 3) + '...'}
+      <span hidden> {title}</span>
+    </>
+  );
+};

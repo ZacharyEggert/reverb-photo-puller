@@ -13,18 +13,18 @@ export default function List() {
   };
 
   return (
-    <section className="fixed right-0 col-span-3 h-full w-1/3">
+    <section className="fixed right-0 col-span-3 h-full w-1/3 px-2 py-4">
       <div className="h-full w-full overflow-y-scroll">
         <table className="w-full">
-          <thead>
-            <tr className="gap-1">
-              <th className="w-1/6">PHOTO</th>
-              <th className="w-1/6">ID</th>
-              <th className="w-3/6">TITLE</th>
-              <th className="w-1/6">DATE</th>
+          <thead className="rounded-t-md bg-neutral-900">
+            <tr className="gap-1 rounded-t-md">
+              <th className="w-1/6 rounded-tl-md py-2">PHOTO</th>
+              <th className="w-1/6 py-2">ID</th>
+              <th className="w-3/6 py-2">TITLE</th>
+              <th className="w-1/6 rounded-tr-md py-2">DATE</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="bg-neutral-900/50">
             {listingList &&
               listingList.map((listing) => (
                 <ListingRow

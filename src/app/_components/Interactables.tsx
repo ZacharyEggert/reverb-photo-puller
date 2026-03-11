@@ -24,7 +24,7 @@ export default function Interactables() {
       <input
         value={reverbNumber}
         onChange={(e) => setReverbNumber(e.target.value)}
-        className="mx-auto my-2 bg-neutral-700 px-2 py-1 text-center uppercase xl:w-1/2 xl:py-2 xl:text-lg"
+        className="mx-auto my-2 rounded-md bg-neutral-800 px-2 py-1 text-center uppercase xl:w-1/2 xl:py-2 xl:text-lg"
       />
       <CustomButton
         onClick={() => downloadAllPhotos(listingPhotos, reverbNumber)}
@@ -56,7 +56,7 @@ const CustomButton = (props: JSX.IntrinsicElements['button']) => {
   return (
     <button
       {...rest}
-      className={`mx-auto my-2 min-w-36 bg-neutral-700 px-2 py-1 text-center xl:w-1/2 xl:py-2 xl:text-lg ${className}`}
+      className={`mx-auto my-2 min-w-36 rounded-md bg-neutral-800 px-2 py-1 text-center xl:w-1/2 xl:py-2 xl:text-lg ${className}`}
     >
       {children}
     </button>

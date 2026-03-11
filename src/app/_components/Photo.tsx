@@ -11,17 +11,18 @@ export default function Photo(props: {
   const { reverbNumber } = useFormContext();
 
   return (
-    <div key={listingPhoto.id} className="relative aspect-square">
-      <div className="grid h-full w-full items-center overflow-clip bg-neutral-700">
-        <img
-          src={listingPhoto.preview_url}
-          className="mx-auto my-auto block max-h-full max-w-full"
-          onClick={() => {
-            //download the image
-            downloadImage(listingPhoto.preview_url, reverbNumber, i);
-          }}
-        />
-      </div>
+    <div
+      key={listingPhoto.id}
+      className="relative grid aspect-5/7 items-center overflow-hidden rounded-md bg-black/50"
+    >
+      <img
+        src={listingPhoto.preview_url}
+        className="absolute inset-0 top-auto bottom-auto object-cover"
+        onClick={() => {
+          //download the image
+          downloadImage(listingPhoto.preview_url, reverbNumber, i);
+        }}
+      />
     </div>
   );
 }

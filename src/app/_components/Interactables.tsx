@@ -20,11 +20,11 @@ export default function Interactables() {
   } = useFormContext();
 
   return (
-    <section className="my-4 grid items-center xl:grid-cols-2">
+    <section className="my-1 grid items-center lg:my-4 xl:grid-cols-2">
       <input
         value={reverbNumber}
         onChange={(e) => setReverbNumber(e.target.value)}
-        className="mx-auto my-2 rounded-md bg-neutral-800 px-2 py-1 text-center uppercase xl:w-1/2 xl:py-2 xl:text-lg"
+        className="mx-auto my-1 rounded-md bg-neutral-800 px-2 py-1 text-center uppercase lg:my-2 lg:w-1/2 lg:py-2 lg:text-lg"
       />
       <CustomButton
         onClick={() => downloadAllPhotos(listingPhotos, reverbNumber)}
@@ -56,7 +56,7 @@ const CustomButton = (props: JSX.IntrinsicElements['button']) => {
   return (
     <button
       {...rest}
-      className={`mx-auto my-2 min-w-36 rounded-md bg-neutral-800 px-2 py-1 text-center xl:w-1/2 xl:py-2 xl:text-lg ${className}`}
+      className={`mx-auto my-1 min-w-36 rounded-md bg-neutral-800 px-2 py-1 text-center lg:my-2 lg:w-1/2 lg:py-2 lg:text-lg ${className}`}
     >
       {children}
     </button>

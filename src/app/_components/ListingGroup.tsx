@@ -13,7 +13,7 @@ export default function List() {
   };
 
   return (
-    <section className="fixed right-0 col-span-3 h-full w-1/3 px-2 py-4">
+    <section className="fixed right-0 col-span-3 h-full w-1/3 px-0.5 py-2 lg:px-2 lg:py-4">
       <div className="h-full w-full overflow-y-scroll">
         <table className="w-full">
           <thead className="rounded-t-md bg-neutral-900">

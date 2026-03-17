@@ -1,7 +1,7 @@
-import PhotoDisplay from './_components/PhotoDisplay';
-import List from './_components/ListingGroup';
 import Interactables from './_components/Interactables';
+import List from './_components/ListingGroup';
 import LoadingSpinner from './_components/LoadingSpinner';
+import PhotoDisplay from './_components/PhotoDisplay';
 
 export default function Home() {
   return (

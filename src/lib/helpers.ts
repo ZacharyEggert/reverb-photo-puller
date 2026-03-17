@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { CloudinaryPhoto } from '~/lib/types';
+
+import type { CloudinaryPhoto } from '~/lib/types';
 export const downloadImage = (url: string, reverbNumber: string, imageNumber = 0) => {
   const i = imageNumber < 10 ? `0${imageNumber}` : imageNumber;
 

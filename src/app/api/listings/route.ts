@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { NextRequest } from 'next/server';
+
 import { env } from '~/env/server.mjs';
-import { Listing } from '~/lib/types';
+import type { Listing } from '~/lib/types';
 
 export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => ({}));

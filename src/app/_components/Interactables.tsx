@@ -1,6 +1,7 @@
 'use client';
 
-import { JSX } from 'react';
+import type { JSX } from 'react';
+
 import { useFormContext } from '~/lib/context/FormContext';
 import { downloadAllPhotos, fetchListingList, fetchReverbPhotos } from '~/lib/helpers';
 

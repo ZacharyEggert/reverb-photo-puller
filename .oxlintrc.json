@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["typescript", "react", "vitest", "nextjs"],
+  "plugins": ["typescript", "react", "vitest", "nextjs", "unicorn"],
   "categories": {},
   "rules": {},
   "settings": {

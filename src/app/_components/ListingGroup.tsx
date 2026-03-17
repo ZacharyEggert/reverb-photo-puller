@@ -1,7 +1,8 @@
 'use client';
-import ListingRow from './Listing';
 import { useFormContext } from '~/lib/context/FormContext';
 import { fetchReverbPhotos } from '~/lib/helpers';
+
+import ListingRow from './Listing';
 
 export default function List() {
   const { listingList, setReverbNumber, setFetching, setListings, setDrawerOpen, drawerOpen } =

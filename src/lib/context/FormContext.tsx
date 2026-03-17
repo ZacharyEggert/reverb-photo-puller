@@ -1,7 +1,8 @@
 'use client';
 
 import { createContext, useContext, useState } from 'react';
-import { CloudinaryPhoto, Listing } from '~/lib/types';
+
+import type { CloudinaryPhoto, Listing } from '~/lib/types';
 
 interface FormContextType {
   reverbNumber: string;

@@ -1,8 +1,9 @@
 'use client';
 
 import Image from 'next/image';
+
 import { useFormContext } from '~/lib/context/FormContext';
-import { Listing } from '~/lib/types';
+import type { Listing } from '~/lib/types';
 
 export default function ListingRow(props: {
   listing: Listing;

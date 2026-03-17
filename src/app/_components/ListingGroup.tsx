@@ -4,14 +4,8 @@ import { useFormContext } from '~/lib/context/FormContext';
 import { fetchReverbPhotos } from '~/lib/helpers';
 
 export default function List() {
-  const {
-    listingList,
-    setReverbNumber,
-    setFetching,
-    setListings,
-    setDrawerOpen,
-    drawerOpen,
-  } = useFormContext();
+  const { listingList, setReverbNumber, setFetching, setListings, setDrawerOpen, drawerOpen } =
+    useFormContext();
 
   const oneClickFetch = (reverbNumber: string) => {
     setReverbNumber(reverbNumber);
@@ -34,11 +28,7 @@ export default function List() {
             <tbody className="bg-neutral-900/50">
               {listingList &&
                 listingList.map((listing) => (
-                  <ListingRow
-                    key={listing.id}
-                    listing={listing}
-                    oneClickFetch={oneClickFetch}
-                  />
+                  <ListingRow key={listing.id} listing={listing} oneClickFetch={oneClickFetch} />
                 ))}
             </tbody>
           </table>

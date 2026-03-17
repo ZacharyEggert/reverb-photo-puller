@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useFormContext } from '~/lib/context/FormContext';
 import { Listing } from '~/lib/types';
 
@@ -15,7 +16,7 @@ export default function ListingRow(props: {
     <tr key={listing.id} className="my-0.5 gap-1">
       <td className="flex h-16 w-full items-center justify-center overflow-hidden">
         {listing.photos && listing.photos.length > 0 ? (
-          <img
+          <Image
             src={listing.photos[0]!._links.thumbnail.href}
             alt={listing.title}
             className="aspect-square max-w-9/12 rounded-sm"
@@ -28,11 +29,7 @@ export default function ListingRow(props: {
             strokeWidth={1.5}
             stroke="currentColor"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 4.5v15m7.5-7.5h-15"
-            />
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
           </svg>
         )}
       </td>
@@ -66,9 +63,7 @@ export default function ListingRow(props: {
       >
         {truncateTitle(listing.title)}
       </td>
-      <td className="text-center text-xs">
-        {new Date(listing.published_at).toLocaleDateString()}
-      </td>
+      <td className="text-center text-xs">{new Date(listing.published_at).toLocaleDateString()}</td>
     </tr>
   );
 }

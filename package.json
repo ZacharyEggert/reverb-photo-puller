@@ -5,7 +5,10 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
-    "lint": "eslint ./src",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check",
     "start": "next start"
   },
   "dependencies": {
@@ -17,8 +20,6 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.5",
-    "@eslint/js": "^10.0.1",
     "@tailwindcss/postcss": "^4.2.1",
     "@types/node": "^22.19.15",
     "@types/react": "^19.2.14",
@@ -26,11 +27,9 @@
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
     "autoprefixer": "^10.4.19",
-    "eslint": "^10.0.3",
-    "eslint-config-next": "^16.1.6",
+    "oxfmt": "^0.41.0",
+    "oxlint": "^1.56.0",
     "postcss": "^8.4.38",
-    "prettier": "^3.2.5",
-    "prettier-plugin-tailwindcss": "^0.7.2",
     "tailwindcss": "^4.2.1",
     "typescript": "^5.4.5"
   },

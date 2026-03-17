@@ -2,11 +2,7 @@
 
 import { JSX } from 'react';
 import { useFormContext } from '~/lib/context/FormContext';
-import {
-  downloadAllPhotos,
-  fetchListingList,
-  fetchReverbPhotos,
-} from '~/lib/helpers';
+import { downloadAllPhotos, fetchListingList, fetchReverbPhotos } from '~/lib/helpers';
 
 export default function Interactables() {
   const {
@@ -42,9 +38,7 @@ export default function Interactables() {
         DOWNLOAD ALL PHOTOS
       </CustomButton>
       <CustomButton
-        onClick={() =>
-          fetchReverbPhotos(setFetching, setListings, reverbNumber)
-        }
+        onClick={() => fetchReverbPhotos(setFetching, setListings, reverbNumber)}
         disabled={fetching}
       >
         FETCH

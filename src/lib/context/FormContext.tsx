@@ -33,9 +33,7 @@ export const useFormContext = () => useContext(FormContext);
 
 export default FormContext;
 
-export const FormProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const FormProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [reverbNumber, setReverbNumber] = useState('');
   const [fetching, setFetching] = useState(false);
   const [listingList, setListingList] = useState<Listing[]>([]);

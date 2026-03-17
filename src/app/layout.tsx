@@ -2,11 +2,7 @@ import { FormProvider } from '~/lib/context/FormContext';
 
 import '~/styles/globals.css';
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="bg-neutral-700">
       <FormProvider>

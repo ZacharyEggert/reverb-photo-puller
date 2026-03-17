@@ -1,10 +1,6 @@
 import axios from 'axios';
 import { CloudinaryPhoto } from '~/lib/types';
-export const downloadImage = (
-  url: string,
-  reverbNumber: string,
-  imageNumber = 0,
-) => {
+export const downloadImage = (url: string, reverbNumber: string, imageNumber = 0) => {
   const i = imageNumber < 10 ? `0${imageNumber}` : imageNumber;
 
   fetch(url, {
@@ -87,10 +83,7 @@ export const fetchListingList = (
     });
 };
 
-export const downloadAllPhotos = (
-  listingPhotos: CloudinaryPhoto[],
-  reverbNumber: string,
-) => {
+export const downloadAllPhotos = (listingPhotos: CloudinaryPhoto[], reverbNumber: string) => {
   if (!listingPhotos) return;
   if (listingPhotos.length === 0) return;
 

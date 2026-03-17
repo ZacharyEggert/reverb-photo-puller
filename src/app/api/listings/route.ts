@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { NextRequest } from 'next/server';
+import type { NextRequest } from 'next/server';
 
 import { env } from '~/env/server.mjs';
 import type { Listing } from '~/lib/types';

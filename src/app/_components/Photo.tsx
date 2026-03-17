@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 import { useFormContext } from '~/lib/context/FormContext';
 import { downloadImage } from '~/lib/helpers';
-import { CloudinaryPhoto } from '~/lib/types';
+import type { CloudinaryPhoto } from '~/lib/types';
 export default function Photo(props: { listingPhoto: CloudinaryPhoto; i: number }) {
   const { listingPhoto, i } = props;
 

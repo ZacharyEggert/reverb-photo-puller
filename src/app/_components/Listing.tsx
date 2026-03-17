@@ -57,8 +57,8 @@ export default function ListingRow(props: {
         {listing.id}
       </td>
       <td
-        onClick={() => {
-          navigator.clipboard.writeText(listing.title);
+        onClick={async () => {
+          await navigator.clipboard.writeText(listing.title);
         }}
         className="cursor-pointer hover:bg-neutral-700"
       >

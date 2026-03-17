@@ -8,9 +8,9 @@ export default function List() {
   const { listingList, setReverbNumber, setFetching, setListings, setDrawerOpen, drawerOpen } =
     useFormContext();
 
-  const oneClickFetch = (reverbNumber: string) => {
+  const oneClickFetch = async (reverbNumber: string) => {
     setReverbNumber(reverbNumber);
-    fetchReverbPhotos(setFetching, setListings, reverbNumber);
+    await fetchReverbPhotos(setFetching, setListings, reverbNumber);
   };
 
   return (

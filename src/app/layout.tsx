@@ -1,5 +1,6 @@
 import { FormProvider } from '~/lib/context/FormContext';
 
+// oxlint-disable-next-line
 import '~/styles/globals.css';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

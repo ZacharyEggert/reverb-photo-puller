@@ -1,3 +1,4 @@
+// oxlint-disable typescript/no-redundant-type-constituents
 // @ts-check
 import { z } from 'zod';
 

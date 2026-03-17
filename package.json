@@ -29,6 +29,7 @@
     "autoprefixer": "^10.4.19",
     "oxfmt": "^0.41.0",
     "oxlint": "^1.56.0",
+    "oxlint-tsgolint": "^0.17.0",
     "postcss": "^8.4.38",
     "tailwindcss": "^4.2.1",
     "typescript": "^5.4.5"

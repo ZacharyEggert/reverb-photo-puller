@@ -2,7 +2,9 @@
   "$schema": "./node_modules/oxlint/configuration_schema.json",
   "plugins": ["typescript", "react", "vitest", "nextjs", "unicorn"],
   "categories": {},
-  "rules": {},
+  "rules": {
+    "@typescript-eslint/consistent-type-imports": "warn"
+  },
   "settings": {
     "jsx-a11y": {
       "polymorphicPropName": "as",
@@ -35,5 +37,9 @@
     "builtin": true
   },
   "globals": {},
-  "ignorePatterns": ["node_modules", ".next", "next.config.mjs"]
+  "ignorePatterns": ["node_modules", ".next", "next.config.mjs"],
+  "options": {
+    "typeAware": true,
+    "typeCheck": true
+  }
 }

@@ -9,6 +9,7 @@ export const downloadImage = (url: string, reverbNumber: string, imageNumber = 0
     headers: {},
   })
     .then((response) => {
+      // oxlint-disable-next-line typescript/no-floating-promises
       response.arrayBuffer().then(function (buffer) {
         const url = window.URL.createObjectURL(new Blob([buffer]));
         const link = document.createElement('a');

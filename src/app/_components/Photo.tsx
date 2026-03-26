@@ -17,6 +17,8 @@ export default function Photo(props: { listingPhoto: CloudinaryPhoto; i: number 
       <Image
         alt=""
         src={listingPhoto.preview_url}
+				width={1080}
+				height={(1080 / 5) * 7}
         className="absolute inset-0 top-auto bottom-auto object-cover"
         onClick={() => {
           //download the image

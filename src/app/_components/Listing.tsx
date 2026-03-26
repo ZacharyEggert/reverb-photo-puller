@@ -20,6 +20,8 @@ export default function ListingRow(props: {
           <Image
             src={listing.photos[0]!._links.thumbnail.href}
             alt={listing.title}
+						width={100}
+						height={100}
             className="aspect-square max-w-9/12 rounded-sm"
           />
         ) : (

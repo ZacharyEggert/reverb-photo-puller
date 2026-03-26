@@ -68,7 +68,7 @@ export const fetchListingList = (
   }
 
   axios
-    .post('/api/listings', { apiKey: undefined })
+    .post('/api/listings', { apiKey })
     .then((res) => {
       if (res.status !== 200) {
         console.log(res);

@@ -1,41 +1,17 @@
-import axios from 'axios';
 import type { NextRequest } from 'next/server';
 
 import { env } from '~/env/server.mjs';
-import type { Listing } from '~/lib/types';
+import Reverb from 'sound-tank'
 
 export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => ({}));
   const apiKey = body?.apiKey || env.REVERB_API_KEY;
+	const reverb = new Reverb({apiKey, });
 
   try {
-    const baseURL = 'https://api.reverb.com/api/my/listings?per_page=100';
-    let page = 1;
-    let listings: Listing[] = [];
-    let shouldContinue = true;
-
-    while (shouldContinue) {
-      const response = await axios.get(`${baseURL}&page=${page}`, {
-        headers: {
-          'Accept-Version': '3.0',
-          'Content-Type': 'application/hal+json',
-          Authorization: `Bearer ${apiKey}`,
-          Accept: 'application/hal+json',
-        },
-      });
-
-      const { data } = response;
-      listings = [...listings, ...data.listings] as Listing[];
-      shouldContinue = data._links.next ? true : false;
-      page++;
-    }
-
-    // console.dir(listings[0]);
-
-    // listings.reverse();
-
+		const {data} = await reverb.listings.getAllMy();
     //pull out the relevant data from the listings
-    const filtered_listings = listings.map((listing) => {
+    const filtered_listings = data.map((listing) => {
       return {
         id: listing.id,
         title: listing.title,
@@ -47,7 +23,7 @@ export async function POST(req: NextRequest) {
       status: 200,
     });
   } catch (error) {
-    console.log(error);
+    console.dir(error, { depth: 3 });
     return new Response(JSON.stringify({ error }), { status: 500 });
   }
 }

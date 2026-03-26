@@ -15,6 +15,16 @@ const config = {
         hostname: 'images.reverb.com',
         pathname: '/**',
       },
+			{
+				protocol: 'https',
+				hostname: 'rvb-img.reverb.com',
+				pathname: '/**'
+			},
+			{
+				protocol: 'https',
+				hostname: '*.reverb.com',
+				pathname: '/**'
+			}
     ],
   },
 };

@@ -19,50 +19,84 @@ export default function Interactables() {
   } = useFormContext();
 
   return (
-    <section className="relative grid items-center py-2 xl:grid-cols-2">
-      <span
-        className="absolute top-1 left-1.5 cursor-pointer text-4xl text-neutral-400 hover:text-neutral-200 xl:hidden"
+    <section className="shrink-0 border-b border-border px-6 py-5">
+      <button
+        className="mb-4 flex items-center gap-2 text-muted transition-colors hover:text-ink xl:hidden"
         onClick={() => setDrawerOpen(true)}
         hidden={fetching || drawerOpen}
+        aria-label="Open listings panel"
       >
-        =
-      </span>
-      <input
-        value={reverbNumber}
-        onChange={(e) => setReverbNumber(e.target.value)}
-        className="mx-auto my-1 rounded-md bg-neutral-800 px-2 py-1 text-center uppercase xl:my-2 xl:w-1/2 xl:py-2 xl:text-lg"
-      />
-      <CustomButton
-        onClick={() => downloadAllPhotos(listingPhotos, reverbNumber)}
-        disabled={fetching}
-      >
-        DOWNLOAD ALL PHOTOS
-      </CustomButton>
-      <CustomButton
-        onClick={() => fetchReverbPhotos(setFetching, setListings, reverbNumber)}
-        disabled={fetching}
-      >
-        FETCH
-      </CustomButton>
-      <CustomButton
-        onClick={() => fetchListingList(setFetching, setListingList)}
-        disabled={fetching}
-      >
-        FETCH LISTING LIST
-      </CustomButton>
+        <svg width="16" height="13" viewBox="0 0 16 13" fill="currentColor">
+          <rect x="0" y="0" width="16" height="2" rx="1" />
+          <rect x="0" y="5.5" width="11" height="2" rx="1" />
+          <rect x="0" y="11" width="13" height="2" rx="1" />
+        </svg>
+        <span className="font-mono text-[10px] uppercase tracking-[0.25em]">Listings</span>
+      </button>
+
+      <div className="flex flex-wrap items-end gap-4">
+        <div className="min-w-0 basis-52">
+          <label className="mb-1.5 block font-mono text-[10px] uppercase tracking-[0.3em] text-muted">
+            Listing ID
+          </label>
+          <input
+            value={reverbNumber}
+            onChange={(e) => setReverbNumber(e.target.value)}
+            placeholder="e.g. 12345678"
+            className="w-full rounded border border-border bg-raised px-3 py-2 font-mono text-sm text-ink placeholder-faint transition-colors focus:border-fence focus:outline-none"
+          />
+        </div>
+
+        <div className="flex flex-wrap gap-2">
+          <ActionButton
+            onClick={() => fetchReverbPhotos(setFetching, setListings, reverbNumber)}
+            disabled={fetching}
+            variant="primary"
+          >
+            Fetch
+          </ActionButton>
+          <ActionButton
+            onClick={() => downloadAllPhotos(listingPhotos, reverbNumber)}
+            disabled={fetching || listingPhotos.length === 0}
+            variant="secondary"
+          >
+            Download All
+          </ActionButton>
+          <ActionButton
+            onClick={() => fetchListingList(setFetching, setListingList)}
+            disabled={fetching}
+            variant="ghost"
+          >
+            Sync Listings
+          </ActionButton>
+        </div>
+      </div>
     </section>
   );
 }
 
-const CustomButton = (props: JSX.IntrinsicElements['button']) => {
-  const { children, className, ...rest } = props;
+type Variant = 'primary' | 'secondary' | 'ghost';
 
+const variantStyles: Record<Variant, string> = {
+  primary: 'bg-amber text-bg font-semibold hover:bg-gold disabled:opacity-40',
+  secondary:
+    'border border-amber text-amber hover:bg-amber hover:text-bg disabled:opacity-30',
+  ghost:
+    'border border-border text-muted hover:border-fence hover:text-ink disabled:opacity-30',
+};
+
+function ActionButton({
+  children,
+  variant = 'ghost',
+  className,
+  ...rest
+}: JSX.IntrinsicElements['button'] & { variant?: Variant }) {
   return (
     <button
       {...rest}
-      className={`mx-auto my-1 min-w-36 rounded-md bg-neutral-800 px-2 py-1 text-center xl:my-2 xl:w-1/2 xl:py-2 xl:text-lg ${className}`}
+      className={`rounded px-4 py-2 font-mono text-[11px] uppercase tracking-widest transition-all disabled:cursor-not-allowed ${variantStyles[variant]} ${className ?? ''}`}
     >
       {children}
     </button>
   );
-};
+}

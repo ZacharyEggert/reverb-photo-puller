@@ -1,7 +1,155 @@
 @import 'tailwindcss';
 
-@layer components {
-  tr {
-    border-bottom: 1px solid var(--color-neutral-900);
+:root {
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --c-bg: #09090c;
+  --c-surface: #0f0f14;
+  --c-raised: #151519;
+  --c-hover: #1b1b23;
+  --c-border: #1e1e28;
+  --c-fence: #2e2e3c;
+  --c-amber: #b87818;
+  --c-gold: #d8901c;
+  --c-ink: #ddd8cf;
+  --c-muted: #7a7470;
+  --c-faint: #3d3a34;
+}
+
+@utility bg-bg {
+  background-color: var(--c-bg);
+}
+@utility bg-surface {
+  background-color: var(--c-surface);
+}
+@utility bg-raised {
+  background-color: var(--c-raised);
+}
+@utility bg-hover {
+  background-color: var(--c-hover);
+}
+@utility bg-amber {
+  background-color: var(--c-amber);
+}
+@utility bg-gold {
+  background-color: var(--c-gold);
+}
+
+@utility text-ink {
+  color: var(--c-ink);
+}
+@utility text-muted {
+  color: var(--c-muted);
+}
+@utility text-faint {
+  color: var(--c-faint);
+}
+@utility text-amber {
+  color: var(--c-amber);
+}
+@utility text-bg {
+  color: var(--c-bg);
+}
+
+@utility border-border {
+  border-color: var(--c-border);
+}
+@utility border-fence {
+  border-color: var(--c-fence);
+}
+@utility border-amber {
+  border-color: var(--c-amber);
+}
+
+@utility placeholder-faint {
+  &::placeholder {
+    color: var(--c-faint);
   }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: 'Syne', ui-sans-serif, sans-serif;
+  background: var(--c-bg);
+  color: var(--c-ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--c-fence);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--c-muted);
+}
+
+.photo-tile {
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  background: var(--c-raised);
+}
+
+.photo-tile .photo-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(184, 120, 24, 0.22) 0%, transparent 55%);
+  opacity: 0;
+  transition: opacity 200ms ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.photo-tile:hover .photo-shimmer {
+  opacity: 1;
+}
+
+.photo-tile .photo-dl-icon {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 200ms ease, transform 200ms ease;
+  z-index: 2;
+  color: rgba(255, 255, 255, 0.9);
+  pointer-events: none;
+}
+
+.photo-tile:hover .photo-dl-icon {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.listing-row {
+  border-bottom: 1px solid var(--c-border);
+  transition: background-color 120ms ease;
+}
+
+.listing-row:hover {
+  background: var(--c-hover);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin {
+  animation: spin 0.8s linear infinite;
 }

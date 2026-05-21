@@ -50,6 +50,7 @@ export const fetchReverbPhotos = async (
 export const fetchListingList = async (
   setFetching: (fetching: boolean) => void,
   setListingList: (listings: any) => void,
+  allListings = false,
 ) => {
   setFetching(true);
 
@@ -68,7 +69,7 @@ export const fetchListingList = async (
     const response = await fetch('/api/listings', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ apiKey }),
+      body: JSON.stringify({ apiKey, state: allListings ? 'all' : undefined }),
     });
 
     if (!response.ok) throw new Error('failed to fetch listing list');

@@ -10,10 +10,12 @@ export async function POST(req: NextRequest) {
 
   const encoder = new TextEncoder();
 
+  const state = body?.state;
+
   const stream = new ReadableStream({
     async start(controller) {
       try {
-        for await (const listing of reverb.listings.streamAllMy()) {
+        for await (const listing of reverb.listings.streamAllMy(state ? { state } : undefined)) {
           const filtered = {
             id: listing.id,
             title: listing.title,

@@ -10,7 +10,7 @@ export default function PhotoDisplay() {
   return (
     <section className="flex-1 p-6">
       <div className="mb-4 flex items-center gap-2">
-        <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted">Photos</span>
+        <span className="font-mono text-[10px] tracking-[0.3em] text-muted uppercase">Photos</span>
         {listingPhotos.length > 0 && (
           <span className="font-mono text-[10px] text-faint">— {listingPhotos.length}</span>
         )}

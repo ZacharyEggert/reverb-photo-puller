@@ -1,6 +1,7 @@
 'use client';
 
 import type { JSX } from 'react';
+import { useState } from 'react';
 
 import { useFormContext } from '~/lib/context/FormContext';
 import { downloadAllPhotos, fetchListingList, fetchReverbPhotos } from '~/lib/helpers';
@@ -17,6 +18,7 @@ export default function Interactables() {
     setDrawerOpen,
     drawerOpen,
   } = useFormContext();
+  const [allListings, setAllListings] = useState(false);
 
   return (
     <section className="shrink-0 border-b border-border px-6 py-5">
@@ -63,12 +65,23 @@ export default function Interactables() {
             Download All
           </ActionButton>
           <ActionButton
-            onClick={() => fetchListingList(setFetching, setListingList)}
+            onClick={() => fetchListingList(setFetching, setListingList, allListings)}
             disabled={fetching}
             variant="ghost"
           >
             Sync Listings
           </ActionButton>
+          <button
+            onClick={() => setAllListings((v) => !v)}
+            disabled={fetching}
+            className={`rounded-full border px-3 py-1 font-mono text-[10px] uppercase tracking-widest transition-all disabled:cursor-not-allowed disabled:opacity-30 ${
+              allListings
+                ? 'border-amber bg-amber text-bg'
+                : 'border-border text-muted hover:border-fence hover:text-ink'
+            }`}
+          >
+            All
+          </button>
         </div>
       </div>
     </section>

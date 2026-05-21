@@ -1408,10 +1408,10 @@ sharp@^0.34.5:
     "@img/sharp-win32-ia32" "0.34.5"
     "@img/sharp-win32-x64" "0.34.5"
 
-sound-tank@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/sound-tank/-/sound-tank-2.1.0.tgz#9406ccf8d49f8fbac437df0e6ebf4a2c445c4b73"
-  integrity sha512-FX1LpIbAYGZwAP+3Fc5SnyRSPau0dFwwMv/k2Cshj3G/AwcK+UkhcXNgWdzSlXhnNfffiD07EppIG+ca5+UlbQ==
+sound-tank@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/sound-tank/-/sound-tank-2.1.1.tgz#b23d77e0ec44158e49ef825e0712fbccb23787bb"
+  integrity sha512-8Zi42i0A7kWuq5JiVFbMP/7xZSAg6tzmPP2XkRlX7Yj+SuvrY93aQ840vw7YBptsS8ibxBrxdHR0QAqdx8knYg==
 
 source-map-js@^1.0.2:
   version "1.0.2"

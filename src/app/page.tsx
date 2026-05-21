@@ -7,14 +7,14 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-bg text-ink">
       <LoadingSpinner />
-      <main className="flex min-h-screen flex-col xl:mr-[360px]">
+      <main className="flex min-h-screen flex-col xl:mr-90">
         <header className="flex shrink-0 items-center gap-3 border-b border-border px-6 py-4">
           <span className="block h-1.5 w-1.5 rounded-full bg-amber" />
           <div className="flex items-baseline gap-2.5">
-            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted">
+            <span className="font-mono text-[10px] tracking-[0.3em] text-muted uppercase">
               Reverb
             </span>
-            <span className="text-sm font-bold uppercase tracking-[0.18em] text-ink">
+            <span className="text-sm font-bold tracking-[0.18em] text-ink uppercase">
               Photobank
             </span>
           </div>

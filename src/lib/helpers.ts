@@ -47,42 +47,59 @@ export const fetchReverbPhotos = async (
     });
 };
 
-export const fetchListingList = (
+export const fetchListingList = async (
   setFetching: (fetching: boolean) => void,
   setListingList: (listings: any) => void,
 ) => {
   setFetching(true);
-  console.log('fetching listing list');
 
-  //get the apiKey from local storage
-  const apiKey = localStorage.getItem('apiKey');
-  //if it doesn't exist, prompt the user for it
+  let apiKey = localStorage.getItem('apiKey');
   if (!apiKey) {
-    const apiKey_ = prompt(
+    const entered = prompt(
       'Enter your reverb api key (read priviledges) or default to Diablo Guitars',
     );
-    if (apiKey_) {
-      // if the user entered a key, save it to local storage
-      localStorage.setItem('apiKey', apiKey_);
+    if (entered) {
+      localStorage.setItem('apiKey', entered);
+      apiKey = entered;
     }
   }
 
-  axios
-    .post('/api/listings', { apiKey })
-    .then((res) => {
-      if (res.status !== 200) {
-        console.log(res);
-        throw new Error('failed to fetch listing list');
-      }
-      console.log(res.data);
-      setListingList(res.data.listings);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-    .finally(() => {
-      setFetching(false);
+  try {
+    const response = await fetch('/api/listings', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ apiKey }),
     });
+
+    if (!response.ok) throw new Error('failed to fetch listing list');
+    if (!response.body) throw new Error('no response body');
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    const accumulated: any[] = [];
+    let buffer = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split('\n');
+      buffer = lines.pop() ?? '';
+      for (const line of lines) {
+        if (!line.trim()) continue;
+        accumulated.push(JSON.parse(line));
+        setListingList([...accumulated]);
+      }
+    }
+    if (buffer.trim()) {
+      accumulated.push(JSON.parse(buffer));
+      setListingList([...accumulated]);
+    }
+  } catch (err) {
+    console.log(err);
+  } finally {
+    setFetching(false);
+  }
 };
 
 export const downloadAllPhotos = (listingPhotos: CloudinaryPhoto[], reverbNumber: string) => {

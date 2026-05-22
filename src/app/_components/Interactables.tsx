@@ -18,7 +18,7 @@ export default function Interactables() {
     setDrawerOpen,
     drawerOpen,
   } = useFormContext();
-  const [allListings, setAllListings] = useState(false);
+  const [query, setQuery] = useState('');
 
   return (
     <section className="shrink-0 border-b border-border px-6 py-5">
@@ -36,20 +36,19 @@ export default function Interactables() {
         <span className="font-mono text-[10px] uppercase tracking-[0.25em]">Listings</span>
       </button>
 
-      <div className="flex flex-wrap items-end gap-4">
-        <div className="min-w-0 basis-52">
-          <label className="mb-1.5 block font-mono text-[10px] uppercase tracking-[0.3em] text-muted">
-            Listing ID
-          </label>
-          <input
-            value={reverbNumber}
-            onChange={(e) => setReverbNumber(e.target.value)}
-            placeholder="e.g. 12345678"
-            className="w-full rounded border border-border bg-raised px-3 py-2 font-mono text-sm text-ink placeholder-faint transition-colors focus:border-fence focus:outline-none"
-          />
-        </div>
-
-        <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <div className="flex flex-wrap items-end gap-4">
+          <div className="min-w-0 basis-52">
+            <label className="mb-1.5 block font-mono text-[10px] uppercase tracking-[0.3em] text-muted">
+              Listing ID
+            </label>
+            <input
+              value={reverbNumber}
+              onChange={(e) => setReverbNumber(e.target.value)}
+              placeholder="e.g. 12345678"
+              className="w-full rounded border border-border bg-raised px-3 py-2 font-mono text-sm text-ink placeholder-faint transition-colors focus:border-fence focus:outline-none"
+            />
+          </div>
           <ActionButton
             onClick={() => fetchReverbPhotos(setFetching, setListings, reverbNumber)}
             disabled={fetching}
@@ -64,24 +63,27 @@ export default function Interactables() {
           >
             Download All
           </ActionButton>
+        </div>
+
+        <div className="flex flex-wrap items-end gap-2">
+          <div className="min-w-0 basis-44">
+            <label className="mb-1.5 block font-mono text-[10px] uppercase tracking-[0.3em] text-muted">
+              Search
+            </label>
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search all listings…"
+              className="w-full rounded border border-border bg-raised px-3 py-2 font-mono text-sm text-ink placeholder-faint transition-colors focus:border-fence focus:outline-none"
+            />
+          </div>
           <ActionButton
-            onClick={() => fetchListingList(setFetching, setListingList, allListings)}
+            onClick={() => fetchListingList(setFetching, setListingList, query)}
             disabled={fetching}
             variant="ghost"
           >
             Sync Listings
           </ActionButton>
-          <button
-            onClick={() => setAllListings((v) => !v)}
-            disabled={fetching}
-            className={`rounded-full border px-3 py-1 font-mono text-[10px] uppercase tracking-widest transition-all disabled:cursor-not-allowed disabled:opacity-30 ${
-              allListings
-                ? 'border-amber bg-amber text-bg'
-                : 'border-border text-muted hover:border-fence hover:text-ink'
-            }`}
-          >
-            All
-          </button>
         </div>
       </div>
     </section>
